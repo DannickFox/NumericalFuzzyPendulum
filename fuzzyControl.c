@@ -71,10 +71,8 @@ double iDenF (double x) {
     for (int i = 0; i < 5; i++) {
         // Find minimum value for each rule.
         double val = min3((*ruleSet[i])(theta), (*ruleSet[i])(d_theta), (*ruleSet[4 - i])(x));
-        
-        if (val > maxVal) { // Find maximum value of applied rule.
-            maxVal = val;
-        }
+        // Find maximum value of applied rule.
+        if (val > maxVal) maxVal = val;
     }
 
     return maxVal;
