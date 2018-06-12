@@ -87,27 +87,22 @@ void plotMembership (void) {
     double limB = 2;
     double step_sz = 0.02;
     int steps = (int) ((limB - limA) / step_sz);
-    double x, pb, ps, z, ns, nb;
 
-    // For graph generation.
+    // Reserve memory for output file generation.
     double **MemberOut = malloc(6 * sizeof(double*));
     for (int i = 0; i < 6; i++) {
         MemberOut[i] = malloc((steps + 1) * sizeof(double));
     }
-    double *outputRes[6] = {&x, &pb, &ps, &z, &ns, &nb};
+
+    double (*memFuncs[5])(double) = {PB, PS, Z, NS, NB};
     char *tagNames[6] = {"x", "PB", "PS", "Z", "NS", "NB"};
 
     for (int i = 0; i <= steps; i++) {
-        x = i * step_sz + limA;
-
-        pb = PB(x);
-        ps = PS(x);
-         z =  Z(x);
-        ns = NS(x);
-        nb = NB(x);
-        
-        for (int j = 0; j < 6; j++) MemberOut[j][i] = *outputRes[j];
+        // Create data for membership functions.
+        double x = i * step_sz + limA;
+        for (int j = 0; j < 6; j++) MemberOut[j][i] = j == 0 ? x : (*memFuncs[j - 1])(x);
     }
+    // Generate file.
     fileGen("membership.dat", 6, steps + 1, MemberOut, tagNames);
 
     for (int i = 0; i < 6; i++) free(MemberOut[i]);
