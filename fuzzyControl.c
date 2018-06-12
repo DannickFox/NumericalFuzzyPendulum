@@ -13,7 +13,7 @@ double PB (double x) {
     return x <= bound2 ? exp(-(m * m) / (2 * sigma * sigma)) : 1;
 }
 double PS (double x) {
-    // Positive-Small membership-
+    // Positive-Small membership.
     double m = x - bound1;
     return exp(-(m * m) / (2 * sigma * sigma));
 }
@@ -89,9 +89,8 @@ double iNumF (double x) {
     return x * iDenF(x);
 }
 
-
-
 double ctrl_u (double ang, double d_ang) {
+    // Fuzzy controller.
     theta = ang;
     d_theta = d_ang;
 
