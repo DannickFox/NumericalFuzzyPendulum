@@ -24,7 +24,7 @@ void plotMembership(void);
 
 int main(void) {
     // Simulation paramters.
-    double sim_time = 15; // Seconds.
+    double sim_time = 15; // seconds
     double delta = 0.1; // dt
     int N_steps = (int) (sim_time / delta);
     double t = 0;
@@ -35,9 +35,8 @@ int main(void) {
 
     // For graph generation.
     double **pendOut = malloc(N_RESULTS * sizeof(double*));
-    for (int i = 0; i < N_RESULTS; i++) {
-        pendOut[i] = malloc((N_steps + 1) * sizeof(double));
-    }
+    for (int i = 0; i < N_RESULTS; i++) pendOut[i] = malloc((N_steps + 1) * sizeof(double));
+
     double *outputRes[N_RESULTS] = {&t, &x1, &x2, &u};
     char *tagNames[N_RESULTS] = {"t", "theta", "d_theta", "d_d_x"};
     
@@ -73,16 +72,16 @@ double intg_rk4 (double x_i, double y_i, double h, double (*fcn)(double, double)
 }
 
 double d_x1 (double t, double x2) {
-    // function for change in angular position.
+    // Function for change in angular position.
     return x2;
 }
 double d_x2 (double t, double x1) {
-    // function for change in angular velocity.
+    // Function for change in angular velocity.
     return (u * cos(x1) + g * sin(x1)) / l;
 }
 
 void plotMembership (void) {
-    // generates file for membership functions.
+    // Generates file for membership functions.
     double limA = -2;
     double limB = 2;
     double step_sz = 0.02;
@@ -90,9 +89,7 @@ void plotMembership (void) {
 
     // Reserve memory for output file generation.
     double **MemberOut = malloc(6 * sizeof(double*));
-    for (int i = 0; i < 6; i++) {
-        MemberOut[i] = malloc((steps + 1) * sizeof(double));
-    }
+    for (int i = 0; i < 6; i++) MemberOut[i] = malloc((steps + 1) * sizeof(double));
 
     double (*memFuncs[5])(double) = {PB, PS, Z, NS, NB};
     char *tagNames[6] = {"x", "PB", "PS", "Z", "NS", "NB"};

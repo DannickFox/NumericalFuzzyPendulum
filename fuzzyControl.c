@@ -48,13 +48,9 @@ double integral (double (*fcn)(double), double x1, double x2, double delta) {
 
 double min3 (double n1, double n2, double n3) {
     // Finds minimum of 3 numbers.
-    if (n1 <= n2 && n1 <= n3) {
-        return n1;
-    } else if (n2 <= n1 && n2 <= n3) {
-        return n2;
-    } else {
-        return n3;
-    }
+    if (n1 <= n2 && n1 <= n3) return n1;
+    else if (n2 <= n1 && n2 <= n3) return n2;
+    else return n3;
 }
 
 double theta, d_theta; // placeholders for integration.
